@@ -1,0 +1,156 @@
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  background: #fdf5ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg-decorations {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ── Center content ── */
+.lock-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Padlock ── */
+.padlock-svg {
+  width: 108px;
+  height: 124px;
+  filter: drop-shadow(0 4px 12px rgba(125, 31, 48, 0.18));
+}
+
+/* ── From / For text ── */
+.from-for {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
+  font-weight: 600;
+  color: #7d1f30;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.from-for .secret {
+  font-size: 14px;
+  font-weight: 400;
+  color: #a85060;
+  margin-top: 3px;
+  letter-spacing: 0.3px;
+}
+
+/* ── PIN dots ── */
+.pin-dots {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid #8b2635;
+  background: #f2dce0;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
+}
+
+.dot.filled {
+  background: #7d1f30;
+  transform: scale(1.08);
+}
+
+.dot.error {
+  background: #e84040;
+  border-color: #c02020;
+}
+
+.dot.success {
+  background: #5a8c40;
+  border-color: #3e6828;
+}
+
+/* ── Keypad ── */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.key-btn {
+  height: 47px;
+  background: rgba(255, 250, 246, 0.88);
+  border: 1px solid rgba(125, 31, 48, 0.20);
+  border-radius: 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 19px;
+  font-weight: 300;
+  color: #7d1f30;
+  cursor: pointer;
+  transition: background 0.13s, transform 0.10s;
+  letter-spacing: 0.4px;
+  backdrop-filter: blur(2px);
+}
+
+.key-btn:hover {
+  background: rgba(139, 38, 53, 0.10);
+}
+
+.key-btn:active {
+  background: rgba(139, 38, 53, 0.20);
+  transform: scale(0.93);
+}
+
+.key-empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.key-back {
+  font-size: 16px;
+}
+
+/* ── Animations ── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-10px); }
+  35%       { transform: translateX(10px); }
+  55%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes floatCloud {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+.shake {
+  animation: shake 0.52s ease-in-out;
+}
+
+.pulse {
+  animation: pulse 0.7s ease-out;
+}
