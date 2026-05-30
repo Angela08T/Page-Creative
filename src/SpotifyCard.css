@@ -195,3 +195,11 @@
 @keyframes spinR {
   to { transform: rotate(360deg); }
 }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .sp-card {
+    min-width: 0;
+    width: 100%;
+  }
+}

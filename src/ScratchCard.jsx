@@ -4,7 +4,7 @@ import './ScratchCard.css'
 const CANVAS_W = 244
 const CANVAS_H = 250
 
-export default function ScratchCard({ photo, video, caption, rotation = 0, zIndex = 1, style = {} }) {
+export default function ScratchCard({ photo, video, caption, rotation = 0, zIndex = 1, style = {}, flow = false }) {
   const canvasRef = useRef(null)
   const scratching = useRef(false)
   const lastPos = useRef(null)
@@ -102,7 +102,7 @@ export default function ScratchCard({ photo, video, caption, rotation = 0, zInde
 
   return (
     <div
-      className="polaroid"
+      className={`polaroid${flow ? ' polaroid--flow' : ''}`}
       style={{ '--rot': `${rotation}deg`, zIndex, ...style }}
     >
       <div className="photo-area">

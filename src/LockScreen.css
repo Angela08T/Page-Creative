@@ -154,3 +154,15 @@
 .pulse {
   animation: pulse 0.7s ease-out;
 }
+
+/* ── Mobile ── */
+@media (max-width: 380px) {
+  .keypad {
+    grid-template-columns: repeat(3, 58px);
+    gap: 7px;
+  }
+  .key-btn {
+    height: 52px;
+    font-size: 20px;
+  }
+}
