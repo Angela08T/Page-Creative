@@ -80,6 +80,42 @@
   margin: 20px 0 16px;
 }
 
+/* ── Mobile layout ── */
+.scratch-page--mobile {
+  min-height: 100vh;
+  background-attachment: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scratch-page--mobile .sp-wrap {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: calc(100vw - 32px);
+  padding-top: 16px;
+}
+
+.cards-mobile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 20px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.scratch-page--mobile .love-letter {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: calc(100% - 32px);
+  margin: 0 auto 40px;
+}
+
+/* ── Letter text ── */
 .letter-from,
 .letter-to {
   font-family: 'Dancing Script', cursive;

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import ScratchCard  from './ScratchCard'
 import SpotifyCard  from './SpotifyCard'
 import foto1  from './assets/foto1.jpeg'
@@ -86,6 +87,16 @@ function LoveLetter() {
   )
 }
 
+function useIsMobile() {
+  const [mobile, setMobile] = useState(() => window.innerWidth <= 768)
+  useEffect(() => {
+    const handle = () => setMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', handle)
+    return () => window.removeEventListener('resize', handle)
+  }, [])
+  return mobile
+}
+
 // top values in vh so they stay correct when the page extends vertically
 const CARDS = [
   { photo: foto1, video: null,   rot: -11, left: '14%', top: '40vh', z: 2, caption: 'Contigo hasta la madrugada 🌙'      },
@@ -98,8 +109,10 @@ const CARDS = [
 ]
 
 export default function ScratchPage() {
+  const isMobile = useIsMobile()
+
   return (
-    <div className="scratch-page">
+    <div className={`scratch-page${isMobile ? ' scratch-page--mobile' : ''}`}>
       {/* Fixed fabric texture */}
       <svg className="bg-texture" aria-hidden="true">
         <filter id="fabric-noise">
@@ -115,25 +128,42 @@ export default function ScratchPage() {
         <SpotifyCard />
       </div>
 
-      {/* Leopard star */}
-      <div className="star-wrap">
-        <LeopardStar/>
-      </div>
+      {/* Leopard star — desktop only */}
+      {!isMobile && (
+        <div className="star-wrap">
+          <LeopardStar/>
+        </div>
+      )}
 
-      {/* All 6 scratch cards */}
-      {CARDS.map(({ photo, video, rot, left, top, z, caption }, i) => (
-        <ScratchCard
-          key={i}
-          photo={photo}
-          video={video}
-          caption={caption}
-          rotation={rot}
-          zIndex={z}
-          style={{ left, top }}
-        />
-      ))}
+      {/* Cards — 2-col grid on mobile, scattered absolute on desktop */}
+      {isMobile ? (
+        <div className="cards-mobile">
+          {CARDS.map(({ photo, video, rot, caption }, i) => (
+            <ScratchCard
+              key={i}
+              photo={photo}
+              video={video}
+              caption={caption}
+              rotation={rot * 0.4}
+              flow
+            />
+          ))}
+        </div>
+      ) : (
+        CARDS.map(({ photo, video, rot, left, top, z, caption }, i) => (
+          <ScratchCard
+            key={i}
+            photo={photo}
+            video={video}
+            caption={caption}
+            rotation={rot}
+            zIndex={z}
+            style={{ left, top }}
+          />
+        ))
+      )}
 
-      {/* Love letter — bottom left */}
+      {/* Love letter */}
       <LoveLetter />
     </div>
   )

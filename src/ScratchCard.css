@@ -60,3 +60,15 @@
   touch-action: none;
   display: block;
 }
+
+/* ── Mobile flow mode ── */
+.polaroid--flow {
+  position: relative;
+  width: 100%;
+}
+
+.polaroid--flow .photo-area {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
