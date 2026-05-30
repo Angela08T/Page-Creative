@@ -1,10 +1,16 @@
 import { useState } from 'react'
-import LockScreen from './LockScreen'
+import LockScreen   from './LockScreen'
+import FlowerScreen from './FlowerScreen'
+import LetterScreen from './LetterScreen'
+import ScratchPage  from './ScratchPage'
 
 function App() {
-  const [unlocked, setUnlocked] = useState(false)
+  const [stage, setStage] = useState('lock')
 
-  return <LockScreen onUnlock={() => setUnlocked(true)} />
+  if (stage === 'lock')    return <LockScreen   onUnlock={()   => setStage('flowers')} />
+  if (stage === 'flowers') return <FlowerScreen  onComplete={()  => setStage('letter')}  />
+  if (stage === 'letter')  return <LetterScreen  onContinue={()  => setStage('scratch')} />
+  return <ScratchPage />
 }
 
 export default App

@@ -1,0 +1,98 @@
+.scratch-page {
+  position: relative;
+  min-height: calc(100vh + 380px);
+  background:
+    radial-gradient(ellipse 180% 140% at 0% 100%,   rgba(148, 28, 45, 0.75), transparent 55%),
+    radial-gradient(ellipse 140% 120% at 100% 0%,   rgba(45,  7, 16, 0.70),  transparent 52%),
+    radial-gradient(ellipse 110% 110% at 55%  45%,  rgba(100, 14, 28, 0.55), transparent 65%),
+    #6e0f1c;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* SVG fabric noise overlay — fixed so it covers the whole scroll */
+.bg-texture {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Spotify card */
+.sp-wrap {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: max-content;
+}
+
+/* Leopard star */
+.star-wrap {
+  position: absolute;
+  left: -2%;
+  top: 2vh;
+  animation: starFloat 5s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+.leopard-star {
+  filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.55));
+  transform: rotate(-8deg);
+}
+
+@keyframes starFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
+
+/* ── Love letter ── */
+.love-letter {
+  position: absolute;
+  left: 5%;
+  top: calc(72vh);
+  width: 460px;
+  background: #0c080f;
+  border-radius: 4px;
+  padding: 0 28px 32px;
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.75),
+    0 2px 8px  rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  clip-path: polygon(
+    0% 3%, 2% 1%, 4% 4%, 6% 1%, 8% 3%, 10% 0%, 12% 2%, 14% 0%,
+    16% 3%, 18% 1%, 20% 4%, 22% 0%, 24% 2%, 26% 0%, 28% 3%,
+    30% 1%, 32% 4%, 34% 1%, 36% 3%, 38% 0%, 40% 2%, 42% 0%,
+    44% 3%, 46% 1%, 48% 4%, 50% 0%, 52% 2%, 54% 0%, 56% 3%,
+    58% 1%, 60% 4%, 62% 1%, 64% 3%, 66% 0%, 68% 2%, 70% 0%,
+    72% 3%, 74% 1%, 76% 4%, 78% 1%, 80% 3%, 82% 0%, 84% 2%,
+    86% 0%, 88% 3%, 90% 1%, 92% 4%, 94% 1%, 96% 3%, 98% 1%, 100% 3%,
+    100% 100%, 0% 100%
+  );
+}
+
+.letter-seal {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 16px;
+}
+
+.letter-from,
+.letter-to {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: left;
+  line-height: 1.7;
+}
+
+.letter-body {
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+  margin-top: 18px;
+}

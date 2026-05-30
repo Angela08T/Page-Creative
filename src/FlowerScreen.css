@@ -1,0 +1,56 @@
+.flower-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: flowerFade 6.0s ease forwards;
+}
+
+@keyframes flowerFade {
+  0%   { opacity: 0; }
+  5%   { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.flower-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Individual flower bloom in + out ── */
+.flower-bloom {
+  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+  animation:
+    bloomIn  0.44s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    bloomOut 0.36s cubic-bezier(0.55, 0, 1, 0.45)    forwards;
+  animation-delay: var(--delay-in), var(--delay-out);
+}
+
+@keyframes bloomIn {
+  0% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0);
+    opacity: 0;
+  }
+  50% { opacity: 1; }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+    opacity: 1;
+  }
+}
+
+@keyframes bloomOut {
+  0% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc));
+    opacity: 1;
+  }
+  30% { opacity: 0.6; }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0);
+    opacity: 0;
+  }
+}
