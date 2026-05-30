@@ -1,0 +1,197 @@
+/* ── Main card ── */
+.sp-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(12, 6, 20, 0.93);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 18px;
+  padding: 14px 20px 14px 14px;
+  min-width: 340px;
+  backdrop-filter: blur(22px);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.70),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  animation: spSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  transition: background 0.25s, box-shadow 0.4s, transform 0.15s;
+  user-select: none;
+}
+
+.sp-card:hover {
+  background: rgba(20, 10, 30, 0.97);
+  transform: translateY(-2px);
+}
+
+/* Green glow when playing */
+.sp-card--on {
+  border-color: rgba(29, 185, 84, 0.22);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.70),
+    0 0 36px rgba(29, 185, 84, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+@keyframes spSlideIn {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Album art ── */
+.sp-art {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  line-height: 0;
+  background: #180828;
+}
+
+.sp-art img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Info ── */
+.sp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-now {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1DB954;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sp-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.sp-artist {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.58);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Equalizer bars (only animate when playing) ── */
+.sp-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+
+.sp-eq span {
+  width: 3px;
+  background: #1DB954;
+  border-radius: 2px;
+  height: 4px;
+}
+
+.sp-card--on .sp-eq span:nth-child(1) { animation: eqBar 0.65s ease-in-out infinite alternate; }
+.sp-card--on .sp-eq span:nth-child(2) { animation: eqBar 0.50s ease-in-out infinite alternate 0.12s; }
+.sp-card--on .sp-eq span:nth-child(3) { animation: eqBar 0.72s ease-in-out infinite alternate 0.06s; }
+
+@keyframes eqBar {
+  from { height: 3px; }
+  to   { height: 10px; }
+}
+
+/* ── Controls ── */
+.sp-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sp-logo-link {
+  display: flex;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.sp-logo-link:hover { opacity: 1; }
+
+/* ── Play / Pause button ── */
+.sp-play-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #1DB954;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.15s, background 0.15s, box-shadow 0.2s;
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.50);
+  outline: none;
+}
+
+.sp-play-btn:hover:not(:disabled) {
+  background: #21d95e;
+  transform: scale(1.10);
+  box-shadow: 0 0 30px rgba(29, 185, 84, 0.70);
+}
+
+.sp-play-btn:active:not(:disabled) {
+  transform: scale(0.93);
+}
+
+.sp-play-btn:disabled {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.35);
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Pulse ring while playing */
+.sp-play-btn--on::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid rgba(29, 185, 84, 0.55);
+  animation: playRing 1.6s ease-out infinite;
+}
+
+@keyframes playRing {
+  0%   { transform: scale(1);    opacity: 0.8; }
+  100% { transform: scale(1.55); opacity: 0;   }
+}
+
+/* Loading spinner */
+.sp-spinner {
+  animation: spinR 0.9s linear infinite;
+}
+
+@keyframes spinR {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,84 @@
+.letter-screen {
+  position: fixed;
+  inset: 0;
+  background: #fdf5ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  animation: envAppear 0.9s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+@keyframes envAppear {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* SVG size */
+.env-svg {
+  width: 390px;
+  max-width: 90vw;
+  height: auto;
+  display: block;
+}
+
+/* ── Vibrate ── */
+@keyframes vibrate {
+  0%, 100% { transform: rotate(0deg) scale(1);    }
+  12%       { transform: rotate(-4deg) scale(1.02); }
+  28%       { transform: rotate(4deg)  scale(1.02); }
+  44%       { transform: rotate(-2.5deg); }
+  60%       { transform: rotate(2.5deg); }
+  76%       { transform: rotate(-1deg); }
+  88%       { transform: rotate(1deg); }
+}
+
+.envelope-wrap.vibrating .env-svg {
+  animation: vibrate 0.43s ease-in-out;
+}
+
+/* ── Letter group (slides up) ── */
+.letter-group {
+  transform: translateY(44px);
+  transition: transform 0.60s cubic-bezier(0.16, 1, 0.3, 1) 0.36s;
+}
+
+.letter-group.revealed {
+  transform: translateY(-35px);
+}
+
+/* ── Flap (rotates open) ── */
+.env-flap {
+  transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.env-flap.open {
+  transform: scaleY(-1);
+}
+
+/* ── Tap hint ── */
+.tap-hint {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  color: #8b2030;
+  margin: 0;
+  letter-spacing: 0.5px;
+  animation: tapPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes tapPulse {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1;    }
+}
+
+.tap-hint.continue {
+  color: #6a1828;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+}
